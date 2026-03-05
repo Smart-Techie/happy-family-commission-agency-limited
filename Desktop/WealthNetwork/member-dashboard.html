@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Malc Nexus Wealth Network - Community savings and investment platform for agricultural and real estate investments.">
+    <meta name="keywords" content="savings, investment, agriculture, real estate, Nigeria, wealth creation">
+    <meta name="author" content="Malc Nexus Technologies Ltd">
+    <meta property="og:title" content="Malc Nexus Wealth Network">
+    <meta property="og:description" content="Save together, grow together">
+    <meta property="og:type" content="website">
+    <title>Member Dashboard - Malc Nexus Wealth Network</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Essential Dashboard Overrides */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+       
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8fafc;
+            overflow-y: auto;
+        }
+       
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+       
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+       
+        .gallery-preview, .payment-history, .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+       
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+       
+        .gallery-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+       
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item img { width: 100%; height: 140px; object-fit: cover; }
+       
+        .gallery-item-info { padding: 0.8rem; }
+        .gallery-item-info h4 { font-size: 0.9rem; margin-bottom: 0.2rem; color: #0f4c5c; }
+        .gallery-item-info p { font-size: 0.8rem; color: #64748b; }
+       
+        .payment-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .payment-table th { background: #f8fafc; padding: 1rem; text-align: left; font-weight: 600; color: #0f4c5c; }
+        .payment-table td { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
+       
+        .status-paid {
+            background: #d4e6e2;
+            color: #1e6f5c;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+       
+        .btn-view-all {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #1e6f5c;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 2px solid #1e6f5c;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+       
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
+            background: #f8fafc;
+            border-radius: 15px;
+            border: 2px dashed #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Malc Nexus</h3>
+                <p>Member Dashboard</p>
+            </div>
+           
+            <nav class="sidebar-nav">
+                <a href="#" class="active" onclick="showSection('overview', event)">📊 Overview</a>
+                <a href="#" onclick="showSection('gallery', event)">📸 Investment Gallery</a>
+                <a href="#" onclick="showSection('payments', event)">💰 My Payments</a>
+                <a href="#" onclick="showSection('profile', event)">👤 Profile</a>
+                <a href="index.html" onclick="logout(); return false;">🚪 Logout</a>
+            </nav>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <div id="overview-section">
+                <div class="dashboard-header">
+                    <h2>Welcome back, <span id="memberName">Member</span>! 👋</h2>
+                    <p>Your dashboard & investment updates</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="font-size: 2.5rem;">💰</div>
+                        <div>
+                            <h3 style="color: #64748b; font-size: 0.85rem;">Total Paid</h3>
+                            <p style="font-size: 1.8rem; font-weight: 700; color: #0f4c5c;" id="totalPaid">₦0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="font-size: 2.5rem;">📅</div>
+                        <div>
+                            <h3 style="color: #64748b; font-size: 0.85rem;">Member Since</h3>
+                            <p style="font-size: 1.3rem; font-weight: 600; color: #0f4c5c;" id="memberSince">2024</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="font-size: 2.5rem;">📸</div>
+                        <div>
+                            <h3 style="color: #64748b; font-size: 0.85rem;">New Photos</h3>
+                            <p style="font-size: 1.3rem; font-weight: 600; color: #0f4c5c;" id="newPhotos">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-preview">
+                    <h3 style="color: #0f4c5c;">📸 Latest Investments</h3>
+                    <div class="gallery-grid" id="galleryPreview">
+                        <div class="empty-state">Loading gallery...</div>
+                    </div>
+                    <a href="#" onclick="showSection('gallery', event)" class="btn-view-all">View Full Gallery →</a>
+                </div>
+
+                <div class="payment-history">
+                    <h3 style="color: #0f4c5c;">💰 Recent Payments</h3>
+                    <table class="payment-table">
+                        <thead>
+                            <tr><th>Date</th><th>Amount</th><th>Status</th></tr>
+                        </thead>
+                        <tbody id="paymentHistoryBody">
+                            <tr><td colspan="3" class="empty-state">No payment history yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="gallery-section" style="display: none;">
+                <div class="dashboard-header">
+                    <h2>📸 Investment Gallery</h2>
+                    <p>Track progress of your pooled funds</p>
+                </div>
+                <div class="gallery-filters" style="margin: 2rem 0; display: flex; gap: 1rem;">
+                    <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+                    <button class="filter-btn" onclick="filterGallery('Agricultural')">Agricultural</button>
+                    <button class="filter-btn" onclick="filterGallery('Real Estate')">Real Estate</button>
+                </div>
+                <div class="gallery-full-grid" id="fullGallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div class="empty-state">No photos yet</div>
+                </div>
+            </div>
+
+            <div id="payments-section" style="display: none;">
+    <div class="dashboard-header">
+        <h2>💰 Make a Payment</h2>
+        <p>Submit your monthly contributions</p>
+    </div>
+
+    <div class="payment-summary" style="background: linear-gradient(135deg, #0f4c5c, #1e6f5c); color: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">Your Payment Plan</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Monthly Contribution</p>
+                <p style="font-size: 2rem; font-weight: 700;">₦20,000</p>
+            </div>
+            <div>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Installments</p>
+                <p style="font-size: 1.5rem;">2 x ₦10,000</p>
+            </div>
+            <div>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Next Due Date</p>
+                <p style="font-size: 1.2rem;" id="nextDueDate">1st of next month</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bank-details-card" style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 2px dashed #1e6f5c;">
+        <h3 style="color: #0f4c5c; margin-bottom: 1.5rem;">🏦 Bank Transfer Details</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div>
+                <p style="color: #64748b; font-size: 0.9rem;">Account Number</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #0f4c5c;">5601660874</p>
+            </div>
+            <div>
+                <p style="color: #64748b; font-size: 0.9rem;">Bank Name</p>
+                <p style="font-size: 1.2rem; font-weight: 600;">Fidelity Bank</p>
+            </div>
+            <div>
+                <p style="color: #64748b; font-size: 0.9rem;">Account Name</p>
+                <p style="font-size: 1.1rem;">Malc Nexus Technologies Ltd</p>
+            </div>
+            <div>
+                <p style="color: #64748b; font-size: 0.9rem;">Amount per Installment</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #1e6f5c;">₦10,000</p>
+            </div>
+        </div>
+        <button class="btn btn-outline" style="margin-top: 1.5rem; width: 100%; border: 1px solid #1e6f5c; padding: 10px; border-radius: 10px; cursor: pointer;" onclick="copyBankDetails()">📋 Copy Bank Details</button>
+    </div>
+
+    <div class="payment-form-container" style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <h3 style="color: #0f4c5c; margin-bottom: 1.5rem;">📤 Submit Payment Receipt</h3>
+       
+        <form id="paymentForm" onsubmit="event.preventDefault(); submitPayment()">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Amount Paid (₦)</label>
+                    <select id="paymentAmount" required style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 10px;">
+                        <option value="10000">₦10,000 (Installment)</option>
+                        <option value="20000">₦20,000 (Full Month)</option>
+                    </select>
+                </div>
+               
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Payment Date</label>
+                    <input type="date" id="paymentDate" required style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 10px;">
+                </div>
+               
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Transaction Reference</label>
+                    <input type="text" id="transactionRef" placeholder="e.g., FID123456789" style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 10px;">
+                </div>
+               
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Upload Receipt (Image)</label>
+                    <input type="file" id="paymentReceipt" accept="image/*" required style="width: 100%; padding: 0.6rem; border: 2px solid #e2e8f0; border-radius: 10px;">
+                </div>
+            </div>
+           
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Additional Notes</label>
+                <textarea id="paymentNotes" rows="3" placeholder="Notes for admin..." style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 10px;"></textarea>
+            </div>
+           
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn-submit" style="flex: 2; background: #1e6f5c; color: white; border: none; padding: 1rem; border-radius: 10px; cursor: pointer; font-weight: 600;">Submit Payment Receipt</button>
+                <button type="reset" class="btn-outline" style="flex: 1; border: 1px solid #64748b; padding: 1rem; border-radius: 10px; cursor: pointer;">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="payment-history" style="background: white; padding: 2rem; border-radius: 20px;">
+        <h3 style="color: #0f4c5c; margin-bottom: 1.5rem;">📋 Your Payment History</h3>
+       
+        <table class="payment-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="text-align: left; background: #f8fafc;">
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Date</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Amount</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Reference</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Status</th>
+                </tr>
+            </thead>
+            <tbody id="fullPaymentHistory">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="receiptModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center;">
+    <div class="modal-content" style="background: white; padding: 2rem; border-radius: 20px; max-width: 500px; width: 90%;">
+        <h2 style="margin-bottom: 1rem;">🧾 Payment Receipt</h2>
+        <div id="receiptPreview" style="text-align: center;">
+            <img id="receiptImage" src="" alt="Receipt" style="max-width: 100%; max-height: 400px; border-radius: 10px; border: 1px solid #eee;">
+        </div>
+        <button class="close-modal" onclick="closeModal('receipt')" style="margin-top: 1.5rem; width: 100%; padding: 10px; background: #0f4c5c; color: white; border: none; border-radius: 10px; cursor: pointer;">Close</button>
+    </div>
+</div>
+            <div id="profile-section" style="display: none;">
+                <div class="dashboard-header"><h2>👤 Account Profile</h2></div>
+                <div class="profile-card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div><small>Full Name</small><p id="profileName" style="font-weight:600;"></p></div>
+                        <div><small>Email</small><p id="profileEmail"></p></div>
+                        <div><small>Phone</small><p id="profilePhone"></p></div>
+                        <div><small>Joined</small><p id="profileJoinDate"></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()" style="display: none;">
+        <span style="position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; cursor: pointer;">&times;</span>
+        <img id="lightboxImg" style="max-width: 80%; max-height: 80%;">
+        <p id="lightboxCaption" style="color: white; margin-top: 1rem;"></p>
+    </div>
+
+    <script>
+        // Data Handling
+        (function init() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) { window.location.href = 'login.html'; return; }
+           
+            document.getElementById('memberName').textContent = user.name;
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profilePhone').textContent = user.phone || 'N/A';
+            document.getElementById('profileJoinDate').textContent = user.joinDate || '2024';
+
+            const members = JSON.parse(localStorage.getItem('members')) || [];
+            const memberData = members.find(m => m.id === user.id) || user;
+           
+            document.getElementById('totalPaid').textContent = `₦${(memberData.totalPaid || 0).toLocaleString()}`;
+           
+            loadGallery();
+            loadPayments(memberData.payments || []);
+        })();
+
+        function showSection(id, e) {
+            ['overview', 'gallery', 'payments', 'profile'].forEach(sec => {
+                document.getElementById(sec + '-section').style.display = (sec === id) ? 'block' : 'none';
+            });
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+        }
+
+        function loadGallery() {
+            const gallery = JSON.parse(localStorage.getItem('gallery')) || [];
+            const preview = document.getElementById('galleryPreview');
+            const full = document.getElementById('fullGallery');
+           
+            const html = gallery.slice(-4).reverse().map(item => `
+                <div class="gallery-item" onclick="openLightbox('${item.imageUrl}', '${item.title}')">
+                    <img src="${item.imageUrl}" alt="${item.title}">
+                    <div class="gallery-item-info"><h4>${item.title}</h4><p>${item.date}</p></div>
+                </div>
+            `).join('');
+           
+            if (preview) preview.innerHTML = html || '<div class="empty-state">No investments yet</div>';
+            if (full) full.innerHTML = html;
+            document.getElementById('newPhotos').textContent = gallery.length;
+        }
+
+        function loadPayments(payments) {
+            const tbody = document.getElementById('paymentHistoryBody');
+            const fullTbody = document.getElementById('fullPaymentHistory');
+           
+            const html = payments.reverse().map(p => `
+                <tr><td>${p.date}</td><td>₦${p.amount.toLocaleString()}</td><td><span class="status-paid">Paid</span></td></tr>
+            `).join('');
+           
+            if (tbody) tbody.innerHTML = html || '<tr><td colspan="3" class="empty-state">No payments found</td></tr>';
+            if (fullTbody) fullTbody.innerHTML = html;
+        }
+
+        function openLightbox(src, cap) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxCaption').textContent = cap;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+       
+        function logout() {
+            localStorage.setItem('currentUser', null);
+            window.location.href = 'index.html';
+        }
+    <!-- Add this at the very bottom of member-dashboard.html, before </body> -->
+
+// ==================== PAYMENT FUNCTIONS ====================
+window.submitPayment = function() {
+    console.log('Submit payment clicked');
+   
+    // Get current user
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        alert('Please login first');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // Get form values
+    const amount = document.getElementById('paymentAmount')?.value;
+    const paymentDate = document.getElementById('paymentDate')?.value;
+    const transactionRef = document.getElementById('transactionRef')?.value || 'N/A';
+    const notes = document.getElementById('paymentNotes')?.value || '';
+    const receiptFile = document.getElementById('paymentReceipt')?.files[0];
+
+    // Validate
+    if (!amount) {
+        alert('Please select amount');
+        return;
+    }
+    if (!paymentDate) {
+        alert('Please select payment date');
+        return;
+    }
+    if (!receiptFile) {
+        alert('Please upload receipt');
+        return;
+    }
+
+    alert('✅ Payment submitted successfully! (Demo mode)\nAmount: ₦' + amount);
+   
+    // Clear form
+    document.getElementById('paymentForm')?.reset();
+};
+
+// Copy bank details
+window.copyBankDetails = function() {
+    const details = 'Malc Nexus Wealth Network\nAccount: 5601660874\nBank: Fidelity Bank\nName: Malc Nexus Technologies Ltd\nAmount: ₦10,000 or ₦20,000';
+    navigator.clipboard.writeText(details).then(() => {
+        alert('✅ Bank details copied!');
+    }).catch(() => {
+        alert('Copy manually:\n\n' + details);
+    });
+};
+
+// Load payment history
+window.loadMemberPayments = function(memberId) {
+    console.log('Loading payments for member:', memberId);
+    const tbody = document.getElementById('fullPaymentHistory');
+    if (tbody) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem;">No payment history yet</td></tr>';
+    }
+};
+
+// Format date
+window.formatDate = function(dateString) {
+    if (!dateString) return 'N/A';
+    return new Date(dateString).toLocaleDateString('en-NG');
+};
+
+// View receipt
+window.viewReceipt = function(paymentId) {
+    alert('Receipt viewing is disabled in demo mode');
+};
+
+// Cancel payment
+window.cancelPayment = function(paymentId) {
+    alert('Payment cancellation is disabled in demo mode');
+};
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Member dashboard loaded');
+   
+    // Set default date to today
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('paymentDate');
+    if (dateInput) dateInput.value = today;
+   
+    // Show next due date
+    const dueDateEl = document.getElementById('nextDueDate');
+    if (dueDateEl) {
+        const now = new Date();
+        if (now.getDate() <= 15) {
+            dueDateEl.textContent = `15th ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
+        } else {
+            const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+            dueDateEl.textContent = `1st ${nextMonth.toLocaleString('default', { month: 'long' })} ${nextMonth.getFullYear()}`;
+        }
+    }
+});
+</script>
+</body>
+</html>

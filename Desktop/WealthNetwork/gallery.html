@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Malc Nexus Wealth Network - Community savings and investment platform for agricultural and real estate investments.">
+    <meta name="keywords" content="savings, investment, agriculture, real estate, Nigeria, wealth creation">
+    <meta name="author" content="Malc Nexus Technologies Ltd">
+    <meta property="og:title" content="Malc Nexus Wealth Network">
+    <meta property="og:description" content="Save together, grow together">
+    <meta property="og:type" content="website">
+    <title>Investment Gallery - Malc Nexus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Malc Nexus</h3>
+                <p>Investment Gallery</p>
+            </div>
+           
+            <nav class="sidebar-nav">
+                <a href="member-dashboard.html">📊 Dashboard</a>
+                <a href="gallery.html" class="active">📸 Gallery</a>
+                <a href="index.html" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h2>📸 2024 Investment Gallery</h2>
+                <p>View all the investments made this year</p>
+            </div>
+
+            <div class="gallery-filters">
+                <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+                <button class="filter-btn" onclick="filterGallery('Agricultural')">Agricultural</button>
+                <button class="filter-btn" onclick="filterGallery('Real Estate')">Real Estate</button>
+            </div>
+
+            <div class="gallery-full-grid" id="fullGallery">
+                </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+        <div id="lightboxCaption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

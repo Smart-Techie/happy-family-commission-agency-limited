@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Malc Nexus Wealth Network - Community savings and investment platform for agricultural and real estate investments.">
+    <meta name="keywords" content="savings, investment, agriculture, real estate, Nigeria, wealth creation">
+    <meta name="author" content="Malc Nexus Technologies Ltd">
+    <meta property="og:title" content="Malc Nexus Wealth Network">
+    <meta property="og:description" content="Save together, grow together">
+    <meta property="og:type" content="website">
+    <title>Admin Dashboard - Malc Nexus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Malc Nexus</h3>
+                <p>Admin Panel</p>
+            </div>
+           
+            <nav class="sidebar-nav">
+                <a href="#overview" class="active">📊 Overview</a>
+                <a href="#upload-gallery">📸 Upload Gallery</a>
+                <a href="#manage-members">👥 Members</a>
+                <a href="#send-newsletter">📧 Newsletter</a>
+                <a href="#investments">💰 Investments</a>
+                <a href="index.html" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h2>Admin Dashboard</h2>
+                <p>Manage investments and member content</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div>
+                        <h3>Total Members</h3>
+                        <p id="totalMembers">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div>
+                        <h3>Pooled Funds</h3>
+                        <p>₦<span id="pooledFunds">0</span></p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📸</div>
+                    <div>
+                        <h3>Gallery Items</h3>
+                        <p id="galleryCount">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-management" id="manage-members">
+    <h3 style="margin-top: 2rem;">👥 Member Management</h3>
+    <p style="color: #64748b; margin-bottom: 1.5rem;">View, manage, and communicate with all members</p>
+   
+    <div class="member-stats-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div class="summary-card" style="background: white; padding: 1.5rem; border-radius: 15px; display: flex; align-items: center; gap: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <span class="summary-icon" style="font-size: 2rem;">👥</span>
+            <div>
+                <h4 style="font-size: 0.85rem; color: #64748b;">Total Members</h4>
+                <p id="totalMembersCount" style="font-size: 1.25rem; font-weight: 700; color: #0f4c5c;">0</p>
+            </div>
+        </div>
+        <div class="summary-card" style="background: white; padding: 1.5rem; border-radius: 15px; display: flex; align-items: center; gap: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <span class="summary-icon" style="font-size: 2rem;">💰</span>
+            <div>
+                <h4 style="font-size: 0.85rem; color: #64748b;">Total Pooled Funds</h4>
+                <p id="totalPooledFunds" style="font-size: 1.25rem; font-weight: 700; color: #0f4c5c;">₦0</p>
+            </div>
+        </div>
+        <div class="summary-card" style="background: white; padding: 1.5rem; border-radius: 15px; display: flex; align-items: center; gap: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <span class="summary-icon" style="font-size: 2rem;">📊</span>
+            <div>
+                <h4 style="font-size: 0.85rem; color: #64748b;">Active This Month</h4>
+                <p id="activeMembers" style="font-size: 1.25rem; font-weight: 700; color: #0f4c5c;">0</p>
+            </div>
+        </div>
+        <div class="summary-card" style="background: white; padding: 1.5rem; border-radius: 15px; display: flex; align-items: center; gap: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <span class="summary-icon" style="font-size: 2rem;">📧</span>
+            <div>
+                <h4 style="font-size: 0.85rem; color: #64748b;">Unread Messages</h4>
+                <p id="unreadMessages" style="font-size: 1.25rem; font-weight: 700; color: #0f4c5c;">0</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="member-filters" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <input type="text" id="memberSearch" placeholder="Search by name, email or phone..." onkeyup="searchMembers()" style="flex: 1; min-width: 250px; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 10px;">
+        <select id="memberFilter" onchange="filterMembers()" style="padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 10px;">
+            <option value="all">All Members</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="new">New (This Month)</option>
+        </select>
+        <button class="btn btn-primary" onclick="exportMembers()">📥 Export List</button>
+        <button class="btn btn-outline" onclick="openModal('addMember')">➕ Add Member</button>
+    </div>
+
+    <div class="members-table-container" style="background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <table class="members-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f8fafc; text-align: left;">
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">ID</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Member</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Contact</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Join Date</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Total Paid</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Status</th>
+                    <th style="padding: 1rem; border-bottom: 2px solid #e2e8f0;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="membersTableBody">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="addMemberModal">
+    <div class="modal-content">
+        <h2>➕ Add New Member</h2>
+        <form id="addMemberForm" onsubmit="event.preventDefault(); addMember()">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="newMemberName" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="newMemberEmail" required>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="newMemberPhone" required>
+            </div>
+            <div class="form-group">
+                <label>Initial Payment (₦)</label>
+                <input type="number" id="newMemberPayment" value="10000">
+            </div>
+            <button type="submit" class="btn-submit">Add Member</button>
+            <button type="button" class="btn-outline" style="width: 100%; margin-top: 0.5rem;" onclick="closeModal('addMember')">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="editMemberModal">
+    <div class="modal-content">
+        <h2>✏️ Edit Member</h2>
+        <form id="editMemberForm" onsubmit="event.preventDefault(); updateMember()">
+            <input type="hidden" id="editMemberId">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="editMemberName" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="editMemberEmail" required>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="editMemberPhone" required>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select id="editMemberStatus">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Update Member</button>
+            <button type="button" class="btn-outline" style="width: 100%; margin-top: 0.5rem;" onclick="closeModal('editMember')">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="memberDetailsModal">
+    <div class="modal-content">
+        <h2>👤 Member Details</h2>
+        <div id="memberDetails" style="margin: 1.5rem 0;"></div>
+        <button class="btn btn-outline" style="width: 100%;" onclick="closeModal('memberDetails')">Close</button>
+    </div>
+</div>
+
+<div class="modal" id="paymentHistoryModal">
+    <div class="modal-content">
+        <h2>💰 Payment History</h2>
+        <div id="paymentHistoryDetails" style="margin: 1.5rem 0;"></div>
+        <button class="btn btn-outline" style="width: 100%;" onclick="closeModal('paymentHistory')">Close</button>
+    </div>
+</div>
+
+            <div class="upload-section" id="upload-gallery">
+                <h3>📸 Upload Investment Photos</h3>
+                <p>Add photos of this year's investments for members to see</p>
+               
+                <form id="uploadForm" onsubmit="event.preventDefault(); uploadPhoto()">
+                    <div class="upload-grid">
+                        <div class="form-group">
+                            <label>Photo Title</label>
+                            <input type="text" id="photoTitle" placeholder="e.g., Bitterkolor Red Oil Batch 1" required>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Investment Type</label>
+                            <select id="photoType">
+                                <option>Agricultural</option>
+                                <option>Real Estate</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Date of Investment</label>
+                            <input type="date" id="photoDate" required>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="photoDesc" placeholder="Describe this investment..." rows="3"></textarea>
+                        </div>
+                       
+                        <div class="form-group full-width">
+                            <label>Photo URL (or upload)</label>
+                            <input type="file" id="photoFile" accept="image/*" onchange="previewImage()">
+                            <small>Or enter image URL: </small>
+                            <input type="url" id="photoUrl" placeholder="https://example.com/image.jpg">
+                        </div>
+                       
+                        <div class="image-preview" id="imagePreview"></div>
+                       
+                        <button type="submit" class="btn-submit">Publish to Member Gallery</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="gallery-management">
+                <h3>📸 Manage Gallery</h3>
+                <div class="admin-gallery-grid" id="adminGallery">
+                    </div>
+            </div>
+
+            <div class="newsletter-section" id="send-newsletter">
+                <h3>📧 Send Newsletter to All Members</h3>
+                <form id="newsletterForm" onsubmit="event.preventDefault(); sendNewsletter()">
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" id="newsletterSubject" placeholder="Investment Update - March 2026" required>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea id="newsletterMessage" rows="10" placeholder="Write your newsletter here..." required></textarea>
+                    </div>
+                   
+                    <button type="submit" class="btn-submit">Send to All Members</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Malc Nexus Wealth Network - Community savings and investment platform for agricultural and real estate investments.">
+    <meta name="keywords" content="savings, investment, agriculture, real estate, Nigeria, wealth creation">
+    <meta name="author" content="Malc Nexus Technologies Ltd">
+    <meta property="og:title" content="Malc Nexus Wealth Network">
+    <meta property="og:description" content="Save together, grow together">
+    <meta property="og:type" content="website">
+    <title>Malc Nexus Wealth Network | Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header with Mobile Menu -->
+<header class="header">
+    <div class="nav-container">
+        <div class="logo">
+            <h1>MALC NEXUS <br><span>Wealth Network</span></h1>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#payment">Payment Plan</a>
+            <a href="#contact">Contact</a>
+            <a href="login.html" class="btn btn-outline">Member Login</a>
+            <a href="#signup" class="btn btn-primary">Join Now</a>
+        </nav>
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+}
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('active');
+    });
+});
+</script>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Save Together,<br><span>Grow Together</span></h2>
+            <p>Join Malc Nexus Wealth Network - a community of smart savers pooling resources for profitable agricultural investments and future real estate opportunities.</p>
+           
+            <div class="countdown-container">
+                <h3>⏰ Next Investment Cycle Begins In:</h3>
+                <div class="countdown-timer" id="countdown">
+                    <div class="timer-block">
+                        <span id="days">00</span>
+                        <small>Days</small>
+                    </div>
+                    <div class="timer-block">
+                        <span id="hours">00</span>
+                        <small>Hours</small>
+                    </div>
+                    <div class="timer-block">
+                        <span id="minutes">00</span>
+                        <small>Minutes</small>
+                    </div>
+                    <div class="timer-block">
+                        <span id="seconds">00</span>
+                        <small>Seconds</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-highlight">
+                <h3>💰 Simple Payment Plan</h3>
+                <p><strong>₦20,000 monthly</strong> · Pay in 2 installments (₦10,000 each)</p>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">₦50M+</div>
+                    <div class="stat-label">Pooled Funds</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <span>🌾</span>
+            <span style="font-size: 4rem; display: block;">+</span>
+            <span>🏘️</span>
+        </div>
+    </section>
+
+    <section class="payment-plan" id="payment">
+        <div class="payment-card">
+            <h3>Membership Payment Plan</h3>
+            <div class="amount">₦20,000</div>
+            <div class="installment">2 installments of ₦10,000 each</div>
+            <p style="margin-bottom: 2rem;">Simple and flexible payment structure</p>
+           
+            <div class="bank-details">
+                <p><strong>Account Number:</strong> 5601660874</p>
+                <p><strong>Bank:</strong> Fidelity Bank</p>
+                <p><strong>Account Name:</strong> Malc Nexus Technologies Ltd</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">First installment secures your membership</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="about">
+        <h2 class="section-title">Why Join Malc Nexus?</h2>
+        <p class="section-subtitle">Simple, transparent, and community-focused wealth creation</p>
+       
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Monthly Contributions</h3>
+                <p>Members contribute ₦20,000 monthly in two installments of ₦10,000.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Admin-Managed Investments</h3>
+                <p>Expert admin team makes all investment decisions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📸</div>
+                <h3>Investment Gallery</h3>
+                <p>Members can view photos of all investments in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌴</div>
+                <h3>Agricultural Focus</h3>
+                <p>Currently investing in Bitterkolor red oil and other products.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="signup-section" id="signup">
+        <div class="signup-container">
+            <div class="signup-info">
+                <h3>Start Your Wealth Journey</h3>
+                <p>Join Malc Nexus Wealth Network today.</p>
+                <ul class="benefits">
+                    <li><span>✓</span> ₦20,000 monthly (2 x ₦10,000 installments)</li>
+                    <li><span>✓</span> Admin-managed investments</li>
+                    <li><span>✓</span> View investment gallery</li>
+                    <li><span>✓</span> Regular updates</li>
+                </ul>
+            </div>
+            <div class="signup-form">
+                <h3 style="margin-bottom: 2rem; color: #0f4c5c;">Become a Member</h3>
+                <form id="signupForm" onsubmit="event.preventDefault(); signupMember()">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone" placeholder="0807 095 2775" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="password" placeholder="Create password" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Malc Nexus Wealth Network</h3>
+                    <p>Building wealth together.</p>
+                </div>
+               
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">📞 0807 095 2775</div>
+                    <div class="contact-info">📧 malcnexus@gmail.com</div>
+                    <div class="contact-info">🏦 Fidelity Bank | 5601660874</div>
+                </div>
+            </div>
+           
+            <div class="legal-links">
+                <a onclick="openModal('terms')">Terms</a>
+                <a onclick="openModal('privacy')">Privacy</a>
+                <a onclick="openModal('disclaimer')">Disclaimer</a>
+            </div>
+           
+            <div class="copyright">
+                © 2024 Malc Nexus Wealth Network. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <h2>Terms & Conditions</h2>
+            <p>By joining, you agree to contribute ₦20,000 monthly in two installments. Payments to Fidelity Bank 5601660874.</p>
+            <button class="close-modal" onclick="closeModal('terms')">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <h2>Privacy Policy</h2>
+            <p>Your data is secure and never shared. We use your email for updates only.</p>
+            <button class="close-modal" onclick="closeModal('privacy')">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="disclaimerModal">
+        <div class="modal-content">
+            <h2>Disclaimer</h2>
+            <p>Investments carry risk. Past performance doesn't guarantee future returns.</p>
+            <button class="close-modal" onclick="closeModal('disclaimer')">Close</button>
+        </div>
+    </div>
+
+    <button class="chatbot-btn" onclick="toggleChat()">💬</button>
+   
+    <div class="chatbot-window" id="chatbot">
+        <div class="chatbot-header">
+            <h4>Malc Nexus Assistant</h4>
+            <button class="close-chat" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="bot-message">👋 Hello! How can I help you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

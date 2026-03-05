@@ -1,0 +1,526 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fa;
+    color: #1e293b;
+    line-height: 1.5;
+}
+
+/* Mobile First Approach */
+.container {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+/* Header - Mobile Optimized */
+.header {
+    background: white;
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.logo h1 {
+    font-size: 1.3rem;
+    color: #0f4c5c;
+    line-height: 1.2;
+}
+
+.logo span {
+    font-size: 0.7rem;
+    color: #64748b;
+    display: block;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #0f4c5c;
+}
+
+.nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+    padding: 0.8rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-links .btn {
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: #1e6f5c;
+    color: white;
+}
+
+.btn-outline {
+    border: 2px solid #1e6f5c;
+    color: #1e6f5c;
+    background: transparent;
+}
+
+/* Hero Section - Mobile */
+.hero {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    color: #0f4c5c;
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 span {
+    font-size: 1.5rem;
+    color: #1e6f5c;
+    display: block;
+}
+
+.hero-content p {
+    font-size: 1rem;
+    color: #475569;
+    margin-bottom: 1.5rem;
+}
+
+/* Countdown Timer - Mobile */
+.countdown-container {
+    background: white;
+    padding: 1rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+    border: 2px dashed #1e6f5c;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.timer-block {
+    background: #0f4c5c;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 10px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.timer-block span {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.timer-block small {
+    font-size: 0.6rem;
+    opacity: 0.8;
+}
+
+/* Payment Highlight */
+.payment-highlight {
+    background: #e9f2f0;
+    padding: 1rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+    border-left: 4px solid #1e6f5c;
+}
+
+.payment-highlight h3 {
+    font-size: 1rem;
+    color: #0f4c5c;
+    margin-bottom: 0.3rem;
+}
+
+/* Stats - Mobile */
+.hero-stats {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: white;
+    padding: 0.8rem;
+    border-radius: 20px;
+    min-width: 100px;
+}
+
+.stat-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e6f5c;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: #64748b;
+}
+
+/* Hero Image */
+.hero-image {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.hero-image span {
+    font-size: 4rem;
+}
+
+/* Payment Plan - Mobile */
+.payment-plan {
+    padding: 2rem 1rem;
+}
+
+.payment-card {
+    background: linear-gradient(135deg, #0f4c5c, #1e6f5c);
+    color: white;
+    border-radius: 25px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.installment {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.bank-details {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 15px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Features - Mobile */
+.features {
+    background: white;
+    padding: 2rem 1rem;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #0f4c5c;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.feature-card {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    color: #0f4c5c;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+/* Sign Up Section - Mobile */
+.signup-section {
+    padding: 2rem 1rem;
+}
+
+.signup-container {
+    background: white;
+    border-radius: 25px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.signup-info h3 {
+    font-size: 1.5rem;
+    color: #0f4c5c;
+    margin-bottom: 1rem;
+}
+
+.benefits {
+    list-style: none;
+}
+
+.benefits li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.benefits li span {
+    background: #d4e6e2;
+    padding: 0.2rem 0.5rem;
+    border-radius: 15px;
+    color: #1e6f5c;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* Form - Mobile */
+.signup-form {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 20px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #334155;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: #1e6f5c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Footer - Mobile */
+.footer {
+    background: #0a2e38;
+    color: white;
+    padding: 2rem 1rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+}
+
+.legal-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.legal-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.copyright {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+/* Chatbot - Mobile */
+.chatbot-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+    background: #1e6f5c;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(30,111,92,0.3);
+    z-index: 1000;
+}
+
+.chatbot-window {
+    position: fixed;
+    bottom: 5rem;
+    right: 1rem;
+    left: 1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1000;
+}
+
+/* Landscape Mode */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+   
+    .nav-links {
+        display: flex;
+        position: static;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        flex-direction: row;
+        padding: 0;
+    }
+   
+    .nav-links a {
+        border-bottom: none;
+        padding: 0.5rem 1rem;
+    }
+   
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+   
+    .signup-container {
+        flex-direction: row;
+    }
+   
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet and up */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+   
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+   
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+   
+    .chatbot-window {
+        left: auto;
+        width: 350px;
+    }
+}
+
+/* Fix for very small phones */
+@media (max-width: 380px) {
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+   
+    .timer-block {
+        min-width: 50px;
+        padding: 0.3rem;
+    }
+   
+    .stat-item {
+        min-width: 80px;
+        padding: 0.5rem;
+    }
+}
