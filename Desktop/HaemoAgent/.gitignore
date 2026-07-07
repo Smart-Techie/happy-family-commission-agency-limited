@@ -1,0 +1,12 @@
+# Ignore the huge AI model (GitHub can't handle it)
+*.gguf
+
+# Ollama junk
+blobs/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Windows junk
+Thumbs.db
